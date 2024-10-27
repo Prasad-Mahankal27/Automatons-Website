@@ -112,7 +112,13 @@
                         class="mobile-nav-item block text-lg font-medium text-white hover:text-red-500 transition duration-300">About</a>
                     <a href="#achievements"
                         class="mobile-nav-item block text-lg font-medium text-white hover:text-red-500 transition duration-300">Achievements</a>
-                    <a href="#vehicles"
+                        <a href="#cells"
+                        class="mobile-nav-item block text-lg font-medium text-white hover:text-red-500 transition duration-300">Cells</a>
+                        <a href="ind.html"
+                        class="mobile-nav-item block text-lg font-medium text-white hover:text-red-500 transition duration-300">Robots</a>
+                        <a href="gallery.html"
+                        class="mobile-nav-item block text-lg font-medium text-white hover:text-red-500 transition duration-300">Gallery</a>
+                        <a href="#vehicles"
                         class="mobile-nav-item block text-lg font-medium text-white hover:text-red-500 transition duration-300">Vehicles</a>
                     <a href="#team"
                         class="mobile-nav-item block text-lg font-medium text-white hover:text-red-500 transition duration-300">Team</a>
@@ -129,15 +135,77 @@
                 Your browser does not support the video tag.
             </video>
         </div> -->
-        <section class="main1" id="home">
-            <h1>
-              Team Automat<span class="car-wheel"
-                ><img src="images/CarWheel.png" style="width: 20px; height: 20px;" alt="CarWheel" /></span
-              >ns
-            </h1>
-            <h2>Defying Gravity, Engineering Excellence</h2>
-            <button class="btn">Join Us</button>
-          </section>
+        <!-- HTML -->
+<section class="main1" id="home">
+    <h1>
+      <div class="team-name">
+        <span class="team-text">Team</span> <span class="no-break">Automat<span class="car-wheel"><img src="images/CarWheel.png" alt="CarWheel"></span>ns</span>
+      </div>
+    </h1>
+    <h2>Defying Gravity, Engineering Excellence</h2>
+    <button class="btn">Join Us</button>
+  </section>
+  
+  <style>
+  /* Base styles */
+  .main1 {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .team-name {
+    font-size: clamp(2rem, 5vw, 4rem); /* Responsive font size */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  .no-break {
+    white-space: nowrap;
+    display: inline-block;
+  }
+  
+  .team-text {
+    display: inline;
+    word-wrap: break-word; /* Allows "Team" to wrap if needed */
+  }
+  
+  .car-wheel img {
+    width: clamp(15px, 2vw, 25px); /* Responsive wheel size */
+    height: auto;
+    vertical-align: middle;
+    margin: 0 2px;
+  }
+  
+  h2 {
+    font-size: clamp(1rem, 3vw, 2rem);
+    line-height: 1.4;
+    margin: 1rem 0;
+    word-wrap: break-word;
+  }
+  
+  .btn {
+    font-size: clamp(0.875rem, 2vw, 1.25rem);
+    padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem);
+  }
+  
+  /* Media Queries for further refinement */
+  @media screen and (max-width: 768px) {
+    .team-name {
+      padding: 0 1rem;
+    }
+    
+    h2 {
+      padding: 0 1rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .team-text {
+      display: block; /* "Team" moves to its own line on very small screens */
+      margin-bottom: 0.5rem;
+    }
+  }
+  </style>
 
         <!-- About Section -->
         <section id="about" class=" md:py-12">

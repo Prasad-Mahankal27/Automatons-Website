@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -421,4 +421,371 @@
       </div>
     </div>
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images\icon.png" type="image/x-icon" />
+    <title>Team Automatons Timeline</title>
+    <style>
+        :root {
+            --primary-color: rgba(25, 3, 113, 0.8);
+            --text-color: rgb(225, 222, 210);
+            --background-color: rgb(31, 30, 30);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .heading-container {
+            width: 100%;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: bolder;
+            text-align: left;
+            background: linear-gradient(to bottom, rgba(61, 10, 245, 0.8), rgba(17, 2, 80, 0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+            letter-spacing: 2px;
+            animation: gradientShift 5s ease infinite,
+                       glowPulse 3s ease-in-out infinite;
+            box-shadow: inset 0 0 10px rgba(25, 3, 113, 0.8),
+                       0 0 10px rgba(25, 3, 113, 0.8);
+        }
+
+        .wheel-container {
+            position: fixed;
+            width: min(60vw, 600px);
+            height: min(60vw, 600px);
+            right: -30vw;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: rotateWheel 40s linear infinite;
+            z-index: 1;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: brightness(1) contrast(1.3);
+        }
+
+        .timeline-item {
+            position: absolute;
+            width: 20%;
+            height: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30% / 15%;
+            cursor: pointer;
+            border: 2px solid var(--primary-color);
+            background: rgba(225, 222, 210, 0.9);
+            transform-origin: center;
+            animation: counterRotate 40s linear infinite;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8) inset;
+        }
+
+        .timeline-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-1 { 
+            top: 50%; 
+            left: -10%; 
+            transform: translate(-50%, -50%);
+            filter: brightness(2);
+        }
+        
+        .item-2 { 
+            top: -10%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            filter: brightness(0.7) contrast(3);
+        }
+        
+        .item-3 { 
+            top: 50%; 
+            right: -10%; 
+            transform: translate(50%, -50%) rotate(180deg);
+        }
+        
+        .item-4 { 
+            bottom: -10%; 
+            left: 50%; 
+            transform: translate(-50%, 50%);
+        }
+
+        .time-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            z-index: 2;
+        }
+
+        .backbone {
+            width: 5px;
+            height: 700px;
+            background: linear-gradient(to bottom, #f8faf8, var(--primary-color), rgb(47, 1, 1));
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .times {
+            width: 200px;
+            background: linear-gradient(to bottom, white, var(--primary-color));
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 1rem;
+            position: relative;
+            margin: 2rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.993);
+        }
+
+        .times:hover {
+            box-shadow: 0 8px 16px rgb(255, 254, 254);
+            transform: scale(1.05);
+        }
+
+        .times:nth-child(odd) {
+            margin-left: auto;
+            margin-right: 52%;
+        }
+
+        .times:nth-child(even) {
+            margin-right: auto;
+            margin-left: 52%;
+        }
+
+        .time1-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-top: 0;
+        }
+
+        .times p {
+            margin-top: 0.5rem;
+            color: black;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .rest {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem 1rem;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        .time-card {
+            background-color: white;
+            border-radius: 10px;
+            border: var(--primary-color) solid 2px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+            box-shadow: 0 6px 10px rgb(249, 248, 248);
+        }
+
+        .time-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgb(255, 255, 255);
+        }
+
+        .time-card:target {
+            animation: highlight 2s ease-out;
+        }
+
+        .time-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+        }
+
+        .time-card p {
+            color: var(--background-color);
+            line-height: 1.6;
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+        }
+
+        @keyframes rotateWheel {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        @keyframes counterRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        @keyframes highlight {
+            0% { background-color: rgba(25, 3, 113, 0.3); }
+            100% { background-color: #ffffff; }
+        }
+
+        @media (max-width: 768px) {
+            .wheel-container {
+                width: 80vw;
+                height: 80vw;
+                right: -40vw;
+            }
+
+            .times {
+                width: 150px;
+            }
+
+            .time1-img {
+                height: 100px;
+            }
+
+            .backbone {
+                left: 2rem;
+            }
+
+            .times:nth-child(odd),
+            .times:nth-child(even) {
+                margin-left: 4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .heading-container {
+                padding: 1rem;
+            }
+
+            .times {
+                width: 120px;
+            }
+
+            .time1-img {
+                height: 80px;
+            }
+
+            .backbone {
+                left: 1rem;
+            }
+
+            .times:nth-child(odd),
+            .times:nth-child(even) {
+                margin-left: 2rem;
+            }
+
+            .rest {
+                margin-top: 1000px;
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wheel-container">
+        <img src="images/wheel3.png" alt="Ferris Wheel" class="wheel" />
+        <div class="timeline-item item-1">
+            <img src="images/2023.png" alt="Timeline 1" />
+        </div>
+        <div class="timeline-item item-2">
+            <img src="images/2022.png" alt="Timeline 2" />
+        </div>
+        <div class="timeline-item item-3">
+            <img src="images/2021.png" alt="Timeline 3" />
+        </div>
+        <div class="timeline-item item-4">
+            <img src="images/2020.png" alt="Timeline 4" />
+        </div>
+    </div>
+
+    <div class="heading-container">
+        <h1>The Legacy of Team Automatons</h1>
+    </div>
+
+    <div class="time-container">
+        <div class="backbone"></div>
+        <div class="times" onclick="document.getElementById('time1_info').scrollIntoView({behavior: 'smooth'})">
+            <img src="images/2023.png" alt="2023" class="time1-img" />
+            <p>Robocon 2023</p>
+        </div>
+        
+        <div class="times" onclick="document.getElementById('time2_info').scrollIntoView({behavior: 'smooth'})">
+            <img src="images/2022.png" alt="2022" class="time1-img" />
+            <p>Robocon 2022</p>
+        </div>
+        
+        <div class="times" onclick="document.getElementById('time3_info').scrollIntoView({behavior: 'smooth'})">
+            <img src="images/2021.png" alt="2021" class="time1-img" />
+            <p>Robocon 2021</p>
+        </div>
+        
+        <div class="times" onclick="document.getElementById('time4_info').scrollIntoView({behavior: 'smooth'})">
+            <img src="images/2020.png" alt="2020" class="time1-img" />
+            <p>Robocon 2020</p>
+        </div>
+    </div>
+
+    <div class="rest">
+        <div id="time1_info" class="time-card">
+            <h3>ROBOCON 2023: CASTING FLOWERS OVER ANGKOR WAT</h3>
+            <p>The competition is to cast flowers over Angkor Wat by the corporation of a rabbit robot and an elephant robot. The actual competition is "Ring Toss Game" using blue and red rings made of rubber hoses instead of flowers. The moment the team successfully put all top rings of their color into all 8 poles (own team's Type 1 poles and Type 2 and Type 3 poles in the Angkor Centre Area), they achieve Chey-Yo and be declared as a winner.</p>
+        </div>
+
+        <div id="time2_info" class="time-card">
+            <h3>ROBOCON 2022: LAGORI</h3>
+            <p>Will the Lagori be piled up successfully? Or will they be attacked before achieving it? Let the exciting game of Lagori begin! The game is between two teams- red and blue. The game is between two teams (Team 1: "Seeker" and Team 2: "Hitter") and the game starts by throwing a ball by the seeker to break a stone tower called "Lagori". While the seekers try to pile up the stones again, the hitter throws balls to interrupt them.</p>
+        </div>
+
+        <div id="time3_info" class="time-card">
+            <h3>ROBOCON 2021: THROWING ARROWS INTO POTS</h3>
+            <p>"Throwing arrows into pots" is a traditional etiquette and game in ancient China. The game is between two teams- red and blue. Each team has the luxury of using two bots namely- defensive robot(DR) and throwing robot(TR). The collective task of the following two robots of the teams is throwing arrows into pots placed on the tables and restricting the opponent's bots from doing the same.</p>
+        </div>
+
+        <div id="time4_info" class="time-card">
+            <h3>ROBOCON 2020: ROBO RUGBY 7s</h3>
+            <p>In ROBOCON 2020 theme, Game field and zones were designed like a rugby ground. The contest was to play rugby 7's game using two robots and five obstacles as five defending players. The highlight of this game is how the two robots collaborate to score Try and the Goal Kick.</p>
+        </div>
+    </div>
+</body>
 </html>
