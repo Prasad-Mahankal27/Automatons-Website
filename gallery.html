@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Team Automatons Racing</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF4136',
+                        secondary: '#1a202c',
+                    },
+                    fontFamily: {
+                        racing: ['Racing Sans One', 'sans-serif'],
+                        batmanfont: ['batmanfont', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px; 
+            background-color: black; 
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            padding: 0 20px; 
+            z-index: 2; 
+        }
+
+        .navbar h1 {
+            color: white; 
+            margin: 0; 
+            font-size: 24px; 
+            letter-spacing: 2px; 
+        }
+
+        .translucent-box:hover {
+            box-shadow: 0 0 25px white; 
+        }
+        
+        .content {
+            height: 200vh; 
+            background: rgba(255, 255, 255, 0.1);
+            padding-top: 60px; 
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .translucent-box {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 5px solid white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            transition: box-shadow 0.3s;
+            padding: 20px;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .photo-card {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* Aspect ratio 1:1 */
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body class="font-roboto overflow-x-hidden mt-10">
+    <div class="w-full overflow-x-hidden">
+
+        <div class="navbar">
+            <h1>OUR MEMORIES</h1> 
+        </div>
+
+        <!-- Background Video -->
+        <video autoplay muted loop class="video-background">
+            <source src="blackstarry.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Responsive Grid Container -->
+        <div class="container mx-auto px-4 py-12 relative z-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+               <!-- Translucent images/photo Card -->
+<div class="translucent-box photo-card" style="background-image: url('images/photo1.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo2.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo4.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo5.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo6.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo7.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo8.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo9.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo10.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo11.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo12.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo13.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo14.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo15.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo16.png');"></div>
+<div class="translucent-box photo-card" style="background-image: url('images/photo17.png');"></div>
+
+                <!-- Add more images/photo cards as needed -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- AOS Initialization -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

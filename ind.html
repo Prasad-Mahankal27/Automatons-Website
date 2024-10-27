@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images\icon.png" type="image/x-icon" />
+    <title>Half Visible Rotating Ferris Wheel</title>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        background-color: rgb(31, 30, 30);
+        overflow: auto;
+        color: rgb(225, 222, 210);
+      }
+
+      .wheel-container {
+        position: fixed;
+        width: 60vw;
+        height: 60vw;
+        border: 2px solid white;
+        border-radius: 50%;
+        right: -30vw;
+        animation: rotateWheel 40s linear infinite;
+        top: 10%;
+        transform: translateY(-50%);
+      }
+
+      .wheel-container .timeline-item {
+        transform-origin: center;
+        animation: counterRotate 40s linear infinite;
+        border: 2px solid blue;
+      }
+
+      @keyframes counterRotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(-360deg);
+        }
+      }
+
+      .wheel {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        filter: brightness(1) contrast(1.3);
+      }
+
+      .timeline-item {
+        position: absolute;
+        width: 20%;
+        height: 15%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform-origin: center;
+        border-radius: 30% /15%;
+        cursor: pointer;
+        border: 2px solid rgba(25, 3, 113, 0.8);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8) inset;
+        background: rgba(225, 222, 210, 0.9);
+        opacity: 1;
+      }
+
+      .item-1 {
+        top: 50%;
+        left: -10%;
+        transform: translate(-50%, -50%);
+        filter: brightness(2);
+      }
+      .item-2 {
+        top: -10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        filter: brightness(0.7) contrast(3);
+      }
+      .item-3 {
+        top: 50%;
+        right: -10%;
+        transform: translate(50%, -50%) rotate(180deg);
+        animation-delay: 1s;
+      }
+      .item-4 {
+        bottom: -10%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+      }
+
+      .timeline-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      @keyframes rotateWheel {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .heading-container {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        margin-left: 10vw;
+        padding-left: 10vh;
+      }
+
+      h1 {
+        font-size: 3em;
+        font-weight: bolder;
+        text-align: right;
+        background: linear-gradient(to bottom, rgba(61, 10, 245, 0.8), rgba(17, 2, 80, 0.8));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 20px 0;
+        animation: gradientShift 5s ease infinite,
+          glowPulse 3s ease-in-out infinite;
+        letter-spacing: 2px;
+        padding: 0.5%;
+        box-shadow: inset 0 0 10px rgba(25, 3, 113, 0.8),
+          0 0 10px rgba(25, 3, 113, 0.8);
+      }
+
+      @media (max-width: 768px) {
+        .wheel-container {
+          width: 80vw;
+          height: 80vw;
+          right: -40vw;
+        }
+        h1 {
+          font-size: 2em;
+        }
+      }
+
+      .time-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+        margin: 130px 0 0 -100px;
+      }
+
+      .backbone {
+        width: 5px;
+        height: 700px;
+        background: linear-gradient(to bottom, #f8faf8, rgba(25, 3, 113, 0.8), rgb(47, 1, 1));
+        position: absolute;
+        left: 80px;
+        top: 10%;
+      }
+
+      .times {
+        max-width: 200px;
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(to bottom, white, rgba(25, 3, 113, 0.8));
+        border: 2px solid rgba(25, 3, 113, 0.8);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        transition: all 0.3s ease;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.993);
+        font-weight: bold;
+        color: black;
+        cursor: pointer;
+      }
+
+      .times:hover {
+        box-shadow: 0 8px 16px rgb(255, 254, 254);
+        transform: scale(1.05);
+      }
+
+      .time1-img {
+        width: 80%;
+        height: 60%;
+        margin-top: 20%;
+        object-fit: cover; 
+      }
+
+      .cable {
+        width: 50px;
+        height: 2px;
+        background: linear-gradient(to right, rgba(25, 3, 113, 0.8), white);
+        position: absolute;
+      }
+
+      .time1 {
+        top: 20px;
+        left: 130px;
+      }
+
+      .time2 {
+        top: 200px;
+        left: -160px;
+      }
+
+      .time3 {
+        top: 380px;
+        left: 130px;
+      }
+
+      .time4 {
+        top: 560px;
+        left: -160px;
+      }
+
+      .cable1 {
+        top: 20px;
+        left: 80px;
+      }
+
+      .cable2 {
+        top: 200px;
+        left: 30px;
+      }
+
+      .cable3 {
+        top: 380px;
+        left: 80px;
+      }
+
+      .cable4 {
+        top: 560px;
+        left: 30px;
+      }
+
+      .text-below {
+        position: absolute;
+        top: 640px;
+        text-align: center;
+        width: 100%;
+      }
+
+      @media (max-width: 500px) {
+        .time-container {
+          transform: scale(0.8);
+          margin: 0;
+        }
+
+        .backbone {
+          height: 700px;
+        }
+
+        .text-below {
+          top: 540px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        .time-container {
+          transform: scale(0.7);
+          margin: 0;
+        }
+
+        .backbone {
+          height: 460px;
+        }
+
+        .text-below {
+          top: 480px;
+        }
+      }
+      
+      .rest {
+        margin-top: 1200px;
+        font-size: 1.2em;
+        color: rgba(25, 3, 113, 0.8);
+        text-align: left;
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        max-width: 500px;
+        left: 10%;
+      }
+
+      @media (max-width: 600px) {
+        .rest {
+          margin-top: 1000px;
+          max-width: 80%;
+          margin-left: 0;
+        }
+      }
+
+      .time-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        border: rgba(25, 3, 113, 0.8) solid 2px;
+        box-shadow: 0 6px 10px rgb(249, 248, 248);
+        width: 90%;
+        margin: 10px;
+        padding: 2vh;
+        transition: transform 0.3s, box-shadow 0.3s;
+        scroll-margin-top: 20px;
+      }
+
+      .time-card:target {
+        animation: highlight 2s ease-out;
+      }
+
+      @keyframes highlight {
+        0% {
+          background-color: rgba(25, 3, 113, 0.3);
+        }
+        100% {
+          background-color: #ffffff;
+        }
+      }
+
+      .time-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgb(255, 255, 255);
+      }
+
+      h2 {
+        color: #0c0259;
+        font-size: 18px;
+      }
+      
+      h3 {
+        color: #0c0259;
+        margin-bottom: 15px;
+      }
+      
+      p {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wheel-container">
+      <img src="images/wheel3.png" alt="Ferris Wheel" class="wheel" />
+      <div class="timeline-item item-1">
+        <img src="images/2023.png" alt="Timeline 1" />
+      </div>
+      <div class="timeline-item item-2">
+        <img src="images/2022.png" alt="Timeline 2" />
+      </div>
+      <div class="timeline-item item-3">
+        <img src="images/2021.png" alt="Timeline 3" />
+      </div>
+      <div class="timeline-item item-4">
+        <img src="images/2020.png" alt="Timeline 4" />
+      </div>
+    </div>
+
+    <div class="heading-container">
+      <h1>The Legacy of Team Automatons</h1>
+    </div>
+
+    <div class="time-container">
+      <div class="backbone"></div>
+      <div class="times time1" onclick="document.getElementById('time1_info').scrollIntoView({behavior: 'smooth'})">
+        <img src="images/2023.png" alt="time 1" class="time1-img" />
+        <p>Robocon 2023</p>
+      </div>
+      <div class="cable cable1"></div>
+      
+      <div class="times time2" onclick="document.getElementById('time2_info').scrollIntoView({behavior: 'smooth'})">
+        <img src="images/2022.png" alt="time 2" class="time1-img" />
+        <p>Robocon 2022</p>
+      </div>
+      <div class="cable cable2"></div>
+      
+      <div class="times time3" onclick="document.getElementById('time3_info').scrollIntoView({behavior: 'smooth'})">
+        <img src="images/2021.png" alt="time 3" class="time1-img" />
+        <p>Robocon 2021</p>
+      </div>
+      <div class="cable cable3"></div>
+      
+      <div class="times time4" onclick="document.getElementById('time4_info').scrollIntoView({behavior: 'smooth'})">
+        <img src="images/2020.png" alt="time 4" class="time1-img" />
+        <p>Robocon 2020</p>
+      </div>
+      <div class="cable cable4"></div>
+    </div>
+
+    <div class="rest">
+      <div id="time1_info" class="time-card">
+        <h3>ROBOCON 2023 CASTING FLOWERS OVER ANGKOR WAT</h3>
+        The competition is to cast flowers over Angkor Wat by the corporation of a rabbit robot and an elephant robot. The actual competition is "Ring Toss Game" using blue and red rings made of rubber hoses instead of flowers. The moment the team successfully put all top rings of their color into all 8 poles (own team's Type 1 poles and Type 2 and Type 3 poles in the Angkor Centre Area), they achieve Chey-Yo and be declared as a winner.
+      </div>
+
+      <div id="time2_info" class="time-card">
+        <h3>ROBOCON 2022 LAGORI</h3>
+        Will the Lagori be piled up successfully? Or will they be attacked before achieving it? Let the exciting game of Lagori begin! The game is between two teams- red and blue. The game is between two teams (Team 1: "Seeker" and Team 2: "Hitter") and the game starts by throwing a ball by the seeker to break a stone tower called "Lagori". While the seekers try to pile up the stones again, the hitter throws balls to interrupt them.
+      </div>
+
+      <div id="time3_info" class="time-card">
+        <h3>ROBOCON 2021 THROWING ARROWS INTO POTS</h3>
+        "Throwing arrows into pots" is a traditional etiquette and game in ancient China. The game is between two teams- red and blue. Each team has the luxury of using two bots namely- defensive robot(DR) and throwing robot(TR). The collective task of the following two robots of the teams is throwing arrows into pots placed on the tables and restricting the opponent's bots from doing the same.
+      </div>
+
+      <div id="time4_info" class="time-card">
+        <h3>ROBOCON 2020 ROBO RUGBY 7s</h3>
+        In ROBOCON 2020 theme, Game field and zones were designed like a rugby ground. The contest was to play rugby 7's game using two robots and five obstacles as five defending players. The highlight of this game is how the two robots collaborate to score Try and the Goal Kick.
+      </div>
+    </div>
+  </body>
+</html>
